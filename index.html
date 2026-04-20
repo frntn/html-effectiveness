@@ -9,6 +9,7 @@
     --ivory: #FAF9F5;
     --slate: #141413;
     --clay: #D97757;
+    --g100: #F0EEE6;
     --g300: #D1CFC5;
     --g500: #87867F;
     --g700: #3D3D3A;
@@ -17,6 +18,7 @@
     --mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--ivory);
@@ -25,27 +27,90 @@
     line-height: 1.5;
   }
   .wrap {
-    max-width: 960px;
+    max-width: 1080px;
     margin: 0 auto;
-    padding: 56px 24px 80px;
+    padding: 64px 28px 120px;
   }
+
+  /* ── masthead ─────────────────────────── */
+  header { margin-bottom: 44px; }
   h1 {
     font-family: var(--serif);
     font-weight: 600;
-    font-size: 30px;
+    font-size: 34px;
     letter-spacing: -0.01em;
-    margin: 0 0 10px;
+    margin: 0 0 12px;
   }
   .intro {
     font-size: 15px;
     color: var(--g700);
-    margin: 0 0 40px;
-    max-width: 640px;
+    margin: 0 0 24px;
+    max-width: 680px;
   }
+  .intro a { color: var(--clay); }
+
+  /* ── toc pills ────────────────────────── */
+  nav.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 4px;
+  }
+  nav.toc a {
+    font-size: 12px;
+    padding: 6px 12px;
+    border: 1px solid var(--g300);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--g700);
+    background: #fff;
+    transition: border-color 120ms, color 120ms;
+  }
+  nav.toc a:hover { border-color: var(--slate); color: var(--slate); }
+
+  /* ── section ──────────────────────────── */
+  section {
+    margin-top: 56px;
+    scroll-margin-top: 24px;
+  }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .sec-head .rule {
+    width: 28px;
+    height: 3px;
+    background: var(--clay);
+    border-radius: 2px;
+    align-self: center;
+    flex-shrink: 0;
+  }
+  .sec-head h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 22px;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .sec-head .count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--g500);
+  }
+  .sec-intro {
+    font-size: 14px;
+    color: var(--g700);
+    max-width: 680px;
+    margin: 0 0 20px 42px;
+  }
+  /* ── cards ────────────────────────────── */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin-left: 42px;
   }
   a.card {
     display: flex;
@@ -63,17 +128,9 @@
     box-shadow: 0 6px 18px rgba(20, 20, 19, 0.08);
     border-color: var(--slate);
   }
-  .eyebrow {
-    font-family: var(--sans);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--g500);
-    margin-bottom: 6px;
-  }
   .title {
     font-family: var(--serif);
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
     line-height: 1.25;
     color: var(--slate);
@@ -90,104 +147,207 @@
     font-family: var(--mono);
     font-size: 11px;
     color: var(--g500);
-    border-top: 1px solid #F0EEE6;
+    border-top: 1px solid var(--g100);
     padding-top: 10px;
   }
   a.card:hover .file { color: var(--clay); }
+
+  @media (max-width: 640px) {
+    .grid, .sec-intro { margin-left: 0; }
+    .sec-head .rule { width: 20px; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>The unreasonable effectiveness of HTML — examples</h1>
-  <p class="intro">Twelve single-file pages an agent produced instead of a wall of text. Open any one in a browser; each is self-contained.</p>
 
-  <div class="grid">
+  <header>
+    <h1>The unreasonable effectiveness of HTML</h1>
+    <p class="intro">
+      Companion examples for the blog post. Each is a single self-contained <code>.html</code> file an
+      agent produced instead of a wall of markdown — open any one directly in a browser. They're grouped
+      by the kind of work they replace.
+    </p>
+    <nav class="toc">
+      <a href="#exploration">Exploration</a>
+      <a href="#code-review">Code Review &amp; Understanding</a>
+      <a href="#design">Design</a>
+      <a href="#prototyping">Prototyping</a>
+      <a href="#illustrations">Illustrations &amp; Diagrams</a>
+      <a href="#decks">Decks</a>
+      <a href="#research">Research &amp; Learning</a>
+      <a href="#reports">Reports</a>
+    </nav>
+  </header>
 
-    <a class="card" href="01-exploration-code-approaches.html">
-      <div class="eyebrow">Exploration</div>
-      <div class="title">Three code approaches</div>
-      <div class="desc">Side-by-side comparison of three ways to solve the same problem, with trade-offs called out inline.</div>
-      <div class="file">01-exploration-code-approaches.html</div>
-    </a>
+  <!-- Exploration -->
+  <section id="exploration">
+    <div class="sec-head"><span class="rule"></span><h2>Exploration</h2><span class="count">2</span></div>
+    <p class="sec-intro">
+      When you're not sure what you want yet. Ask the agent to fan out across several directions and lay
+      them next to each other so you can point at one — instead of reading three sequential walls of text
+      and trying to hold them all in your head.
+    </p>
+    <div class="grid">
+      <a class="card" href="01-exploration-code-approaches.html">
+        <div class="title">Three code approaches</div>
+        <div class="desc">Side-by-side comparison of three ways to solve the same problem, with trade-offs called out inline.</div>
+        <div class="file">01-exploration-code-approaches.html</div>
+      </a>
+      <a class="card" href="02-exploration-visual-designs.html">
+        <div class="title">Visual design directions</div>
+        <div class="desc">A handful of layout and palette options rendered live so you can react to them, not imagine them.</div>
+        <div class="file">02-exploration-visual-designs.html</div>
+      </a>
+    </div>
+  </section>
 
-    <a class="card" href="02-exploration-visual-designs.html">
-      <div class="eyebrow">Exploration</div>
-      <div class="title">Visual design directions</div>
-      <div class="desc">A handful of layout and palette options rendered as thumbnails so you can point at the one you want.</div>
-      <div class="file">02-exploration-visual-designs.html</div>
-    </a>
+  <!-- Code Review & Understanding -->
+  <section id="code-review">
+    <div class="sec-head"><span class="rule"></span><h2>Code Review &amp; Understanding</h2><span class="count">2</span></div>
+    <p class="sec-intro">
+      Diffs and call-graphs are spatial information; markdown flattens them. Let the agent render the
+      change as an annotated diff, or draw the module as boxes and arrows, so the shape of the code is
+      visible at a glance.
+    </p>
+    <div class="grid">
+      <a class="card" href="03-code-review-pr.html">
+        <div class="title">Annotated pull request</div>
+        <div class="desc">A diff rendered with margin notes, severity tags and jump links — easier to scan than scrolling a terminal.</div>
+        <div class="file">03-code-review-pr.html</div>
+      </a>
+      <a class="card" href="04-code-understanding.html">
+        <div class="title">Module map</div>
+        <div class="desc">An unfamiliar package drawn as boxes and arrows, with the hot path highlighted and entry points listed.</div>
+        <div class="file">04-code-understanding.html</div>
+      </a>
+    </div>
+  </section>
 
-    <a class="card" href="03-code-review-pr.html">
-      <div class="eyebrow">Code Review</div>
-      <div class="title">Annotated pull request</div>
-      <div class="desc">A diff rendered with margin notes, severity tags and jump links — easier to scan than scrolling a terminal.</div>
-      <div class="file">03-code-review-pr.html</div>
-    </a>
+  <!-- Design -->
+  <section id="design">
+    <div class="sec-head"><span class="rule"></span><h2>Design</h2><span class="count">2</span></div>
+    <p class="sec-intro">
+      HTML <em>is</em> the medium your design system ships in, so it's the natural format for talking about
+      it. Tokens become swatches, components become contact sheets, and the artifact can be fed straight
+      back into the next prompt.
+    </p>
+    <div class="grid">
+      <a class="card" href="05-design-system.html">
+        <div class="title">Living design system</div>
+        <div class="desc">Colors, type scale and spacing tokens pulled from a repo and rendered as swatches you can copy from.</div>
+        <div class="file">05-design-system.html</div>
+      </a>
+      <a class="card" href="06-component-variants.html">
+        <div class="title">Component variants</div>
+        <div class="desc">Every size, state and intent of one component laid out on a single sheet for review.</div>
+        <div class="file">06-component-variants.html</div>
+      </a>
+    </div>
+  </section>
 
-    <a class="card" href="04-code-understanding.html">
-      <div class="eyebrow">Code Review</div>
-      <div class="title">Module map</div>
-      <div class="desc">An unfamiliar package drawn as boxes and arrows, with the hot path highlighted and entry points listed.</div>
-      <div class="file">04-code-understanding.html</div>
-    </a>
+  <!-- Prototyping -->
+  <section id="prototyping">
+    <div class="sec-head"><span class="rule"></span><h2>Prototyping</h2><span class="count">2</span></div>
+    <p class="sec-intro">
+      Motion and interaction can't be described, only felt. A throwaway page with the real easing curve or
+      the real click-through tells you in five seconds what a paragraph of prose never could.
+    </p>
+    <div class="grid">
+      <a class="card" href="07-prototype-animation.html">
+        <div class="title">Animation sandbox</div>
+        <div class="desc">The transition in isolation with sliders for duration and easing, so you can tune it before wiring it in.</div>
+        <div class="file">07-prototype-animation.html</div>
+      </a>
+      <a class="card" href="08-prototype-interaction.html">
+        <div class="title">Clickable flow</div>
+        <div class="desc">Four screens linked together — enough fidelity to feel whether the interaction is right.</div>
+        <div class="file">08-prototype-interaction.html</div>
+      </a>
+    </div>
+  </section>
 
-    <a class="card" href="05-design-system.html">
-      <div class="eyebrow">Design</div>
-      <div class="title">Living design system</div>
-      <div class="desc">Colors, type scale and spacing tokens pulled straight from the repo and rendered as swatches.</div>
-      <div class="file">05-design-system.html</div>
-    </a>
+  <!-- Illustrations & Diagrams -->
+  <section id="illustrations">
+    <div class="sec-head"><span class="rule"></span><h2>Illustrations &amp; Diagrams</h2><span class="count">2</span></div>
+    <p class="sec-intro">
+      Inline SVG gives the agent a real pen. Ask for the figures for a post or a flowchart of a process and
+      get vector art you can tweak by hand or paste straight into the final document.
+    </p>
+    <div class="grid">
+      <a class="card" href="10-svg-illustrations.html">
+        <div class="title">SVG figure sheet</div>
+        <div class="desc">The diagrams for a blog post, drawn inline so they can be tweaked and copied out one by one.</div>
+        <div class="file">10-svg-illustrations.html</div>
+      </a>
+      <a class="card" href="13-flowchart-diagram.html">
+        <div class="title">Annotated flowchart</div>
+        <div class="desc">A deploy pipeline drawn as a real flowchart — click any step to see what runs, timings, and failure paths.</div>
+        <div class="file">13-flowchart-diagram.html</div>
+      </a>
+    </div>
+  </section>
 
-    <a class="card" href="06-component-variants.html">
-      <div class="eyebrow">Design</div>
-      <div class="title">Component variants</div>
-      <div class="desc">Every size, state and intent of one component laid out on a single contact sheet.</div>
-      <div class="file">06-component-variants.html</div>
-    </a>
+  <!-- Decks -->
+  <section id="decks">
+    <div class="sec-head"><span class="rule"></span><h2>Decks</h2><span class="count">1</span></div>
+    <p class="sec-intro">
+      A handful of <code>&lt;section&gt;</code> tags and twenty lines of JS is a slide deck. Point the agent at a
+      Slack thread or a design doc and get something you can arrow-key through in a meeting — no Keynote,
+      no export step.
+    </p>
+    <div class="grid">
+      <a class="card" href="09-slide-deck.html">
+        <div class="title">Arrow-key slide deck</div>
+        <div class="desc">A short presentation as one HTML file. Left and right to navigate, no build step.</div>
+        <div class="file">09-slide-deck.html</div>
+      </a>
+    </div>
+  </section>
 
-    <a class="card" href="07-prototype-animation.html">
-      <div class="eyebrow">Prototyping</div>
-      <div class="title">Animation sandbox</div>
-      <div class="desc">The transition in isolation with sliders for duration and easing, so you can tune it before wiring it in.</div>
-      <div class="file">07-prototype-animation.html</div>
-    </a>
+  <!-- Research & Learning -->
+  <section id="research">
+    <div class="sec-head"><span class="rule"></span><h2>Research &amp; Learning</h2><span class="count">2</span></div>
+    <p class="sec-intro">
+      An explainer with collapsible sections, tabbed code samples and a glossary in the margin reads very
+      differently from the same words dumped linearly. The agent can build the scaffolding that makes a new
+      topic navigable.
+    </p>
+    <div class="grid">
+      <a class="card" href="14-research-feature-explainer.html">
+        <div class="title">How a feature works</div>
+        <div class="desc">"Explain rate limiting in this repo" — TL;DR box, collapsible request-path steps, tabbed config snippets, and an FAQ.</div>
+        <div class="file">14-research-feature-explainer.html</div>
+      </a>
+      <a class="card" href="15-research-concept-explainer.html">
+        <div class="title">Concept explainer</div>
+        <div class="desc">Consistent hashing taught with a live ring you can add/remove nodes from, a comparison table, and a hover-linked glossary.</div>
+        <div class="file">15-research-concept-explainer.html</div>
+      </a>
+    </div>
+  </section>
 
-    <a class="card" href="08-prototype-interaction.html">
-      <div class="eyebrow">Prototyping</div>
-      <div class="title">Clickable flow</div>
-      <div class="desc">Four screens linked together — enough fidelity to feel whether the interaction is right.</div>
-      <div class="file">08-prototype-interaction.html</div>
-    </a>
+  <!-- Reports -->
+  <section id="reports">
+    <div class="sec-head"><span class="rule"></span><h2>Reports</h2><span class="count">2</span></div>
+    <p class="sec-intro">
+      Recurring documents — status updates, post-mortems — benefit most from a bit of structure and color.
+      A small chart and a colored timeline turn something people skim into something they actually read.
+    </p>
+    <div class="grid">
+      <a class="card" href="11-status-report.html">
+        <div class="title">Weekly status</div>
+        <div class="desc">What shipped, what slipped, and a small chart — formatted for a quick skim on Monday morning.</div>
+        <div class="file">11-status-report.html</div>
+      </a>
+      <a class="card" href="12-incident-report.html">
+        <div class="title">Incident timeline</div>
+        <div class="desc">A post-mortem with a minute-by-minute timeline, log excerpts and the follow-up checklist.</div>
+        <div class="file">12-incident-report.html</div>
+      </a>
+    </div>
+  </section>
 
-    <a class="card" href="09-slide-deck.html">
-      <div class="eyebrow">Decks</div>
-      <div class="title">Arrow-key slide deck</div>
-      <div class="desc">A short presentation as one HTML file. Left and right to navigate, no build step.</div>
-      <div class="file">09-slide-deck.html</div>
-    </a>
-
-    <a class="card" href="10-svg-illustrations.html">
-      <div class="eyebrow">Decks</div>
-      <div class="title">SVG figure sheet</div>
-      <div class="desc">The diagrams for a blog post, drawn inline so they can be tweaked and copied out one by one.</div>
-      <div class="file">10-svg-illustrations.html</div>
-    </a>
-
-    <a class="card" href="11-status-report.html">
-      <div class="eyebrow">Reports</div>
-      <div class="title">Weekly status</div>
-      <div class="desc">What shipped, what slipped, and a small chart — formatted for a quick skim on Monday morning.</div>
-      <div class="file">11-status-report.html</div>
-    </a>
-
-    <a class="card" href="12-incident-report.html">
-      <div class="eyebrow">Reports</div>
-      <div class="title">Incident timeline</div>
-      <div class="desc">A post-mortem with a minute-by-minute timeline, log excerpts and the follow-up checklist.</div>
-      <div class="file">12-incident-report.html</div>
-    </a>
-
-  </div>
 </div>
 </body>
 </html>
