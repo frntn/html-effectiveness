@@ -3,9 +3,13 @@ Source : https://x.com/trq212/status/2052809885763747935
 # Using Claude Code: The Unreasonable Effectiveness of HTML
 
 Markdown has become the dominant file format used by agents to communicate with us. It’s simple, portable, has some rich text capability and is easy for you to edit. Claude has even gotten surprisingly good at using ASCII to make diagrams inside of markdown files.
+
 But as agents have become more and more powerful, I have felt that markdown has become a restricting format. I find it difficult to read a markdown file of more than a hundred lines. I want richer visualizations, color and diagrams and I want to be able to share them easily.
+
 I'm also increasingly not editing these files myself, but using them as specs, reference files, brainstorming outputs, etc. When I do make edits, I’m usually prompting Claude to edit them, which removes one of markdown’s largest benefits.
+
 I’ve started preferring HTML as an output format instead of Markdown and increasingly see this being used by others on the Claude Code team, this is why.
+
 (if you want to start with some examples, you can see a bunch here: https://thariqs.github.io/html-effectiveness, just be sure to come back and read more about why)
 
 ## Why HTML?
